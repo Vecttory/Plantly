@@ -1,19 +1,38 @@
 import { Redirect, Tabs } from "expo-router";
-import Entypo from '@expo/vector-icons/Entypo';
-import Feather from '@expo/vector-icons/Feather';
+import Entypo from "@expo/vector-icons/Entypo";
+import Feather from "@expo/vector-icons/Feather";
 import { theme } from "@/theme";
-
-const hasFinishedOnboarding = true;
+import { useUserStore } from "@/store/userStore";
 
 export default function Layout() {
-
+  const hasFinishedOnboarding = useUserStore(
+    (state) => state.hasFinishedOnboarding,
+  );
   if (!hasFinishedOnboarding) {
-    return <Redirect href="/onboarding" />
+    return <Redirect href="/onboarding" />;
   }
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorGreen }}>
-      <Tabs.Screen name="index" options={{ title: "Home", tabBarLabelVisibilityMode: "unlabeled", tabBarIcon: ({ size, color }) => <Entypo name="leaf" size={size} color={color} /> }} />
-      <Tabs.Screen name="profile" options={{ title: "Profile", tabBarLabelVisibilityMode: "unlabeled", tabBarIcon: ({ size, color }) => <Feather name="user" size={size} color={color} /> }} />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarLabelVisibilityMode: "unlabeled",
+          tabBarIcon: ({ size, color }) => (
+            <Entypo name="leaf" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarLabelVisibilityMode: "unlabeled",
+          tabBarIcon: ({ size, color }) => (
+            <Feather name="user" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
-  )
+  );
 }
