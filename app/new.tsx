@@ -43,7 +43,7 @@ export default function NewScreen() {
       );
     }
 
-    addPlant(name, Number(days));
+    addPlant(name, Number(days), imageUri);
     router.navigate("/");
   };
 
@@ -62,8 +62,6 @@ export default function NewScreen() {
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
     }
-
-    console.log(result);
   };
 
   return (
